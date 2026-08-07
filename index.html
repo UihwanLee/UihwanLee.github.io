@@ -538,6 +538,29 @@
   @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; animation: none !important; }
   }
+
+  /* 인게임 스크린샷 갤러리 */
+  .shots { margin: 22px 0; }
+  .shots .row {
+    display: flex; gap: 12px;
+    overflow-x: auto; padding-bottom: 6px;
+    scroll-snap-type: x proximity;
+  }
+  .shots figure { margin: 0; flex: 0 0 auto; scroll-snap-align: start; }
+  .shots img {
+    display: block; width: 216px; height: auto;
+    border: 1px solid var(--rule-strong);
+    background: var(--surface-2);
+  }
+  .shots .sub {
+    font-family: var(--f-mono); font-size: 11px; color: var(--ink-3);
+    margin-top: 7px; letter-spacing: .02em; max-width: 216px; line-height: 1.45;
+  }
+  .shots > figcaption {
+    font-family: var(--f-mono); font-size: 11.5px; color: var(--ink-3);
+    margin-top: 14px; letter-spacing: .03em;
+  }
+  @media (max-width: 700px) { .shots img { width: 168px; } .shots .sub { max-width: 168px; } }
 </style>
 
 <div class="wrap">
@@ -705,6 +728,24 @@
         서버 API 설계부터 보스 구현, UI, 라이브 반영까지 전 구간을 담당했습니다.
       </p>
 
+            <figure class="shots">
+        <div class="row">
+          <figure>
+            <img src="assets/raid-lobby.jpg" alt="길드 레이드 로비" loading="lazy">
+            <div class="sub">레이드 로비 — 보스 정보 · 강화 스택(0/20) · UTC 리셋 타이머 · 랭킹/퀘스트 진입</div>
+          </figure>
+          <figure>
+            <img src="assets/raid-boss.jpg" alt="보스 패턴 공격" loading="lazy">
+            <div class="sub">황소자리(50101) 패턴 공격 — 패턴별 타겟팅과 누적 데미지 HUD</div>
+          </figure>
+          <figure>
+            <img src="assets/raid-result.jpg" alt="레이드 결과 결산" loading="lazy">
+            <div class="sub">결과 결산 — 누적 피해와 유닛별 기여도 집계</div>
+          </figure>
+        </div>
+        <figcaption>실제 인게임 화면 — 라이브 빌드 캡처</figcaption>
+      </figure>
+
       <h4 style="margin-top:30px">구현 범위</h4>
       <ul class="clean">
         <li><strong>서버 API 7종 설계</strong> 및 도메인 모델링</li>
@@ -848,6 +889,25 @@
         </svg>
         <figcaption>슬롯 7개가 시계방향으로 순환 · 마스크 밖 자리를 둬 등장과 퇴장이 잘리지 않게 처리</figcaption>
       </figure>
+
+      <figure class="shots">
+        <div class="row">
+          <figure>
+            <img src="assets/craft-belt.jpg" alt="무한제조 컨베이어" loading="lazy">
+            <div class="sub">컨베이어 2벨트 순환 — 슬롯별 무료/결제 액션 버튼과 애니메이션 스킵</div>
+          </figure>
+          <figure>
+            <img src="assets/craft-progress.jpg" alt="보상 진행 상태" loading="lazy">
+            <div class="sub">액션 자리 도달 슬롯 하이라이트 — 레벨 구간별 시트 갱신 결과</div>
+          </figure>
+          <figure>
+            <img src="assets/craft-claim.jpg" alt="보상 수령 연출" loading="lazy">
+            <div class="sub">수령 연출 — 다중 수령과 스킵을 함께 지원</div>
+          </figure>
+        </div>
+        <figcaption>실제 인게임 화면 — 라이브 빌드 캡처</figcaption>
+      </figure>
+
 
       <h4>설계와 개선</h4>
       <ul class="clean">
