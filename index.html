@@ -180,6 +180,44 @@
     text-wrap: balance;
   }
   h1 .thin { font-weight: 300; color: var(--ink-2); }
+
+  /* ── 인적사항 카드 ───────────────────── */
+  .identity {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule-strong);
+    border: 1px solid var(--rule-strong);
+    max-width: 760px;
+    margin: 22px 0 26px;
+  }
+  @media (max-width: 560px) {
+    .identity { grid-template-columns: repeat(2, 1fr); }
+  }
+  .identity div { background: var(--surface); padding: 12px 16px; }
+  .identity dt {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 0 0 4px;
+  }
+  .identity dd {
+    margin: 0;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .identity dd a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule-strong);
+  }
+  .identity dd a:hover, .identity dd a:focus-visible {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
   .lede {
     font-size: 1.14rem;
     line-height: 1.72;
@@ -513,24 +551,6 @@
     color: var(--accent);
   }
   .digest h2 { font-size: 1.3rem; margin: 0; }
-  .digest-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px 16px;
-    font-family: var(--f-mono);
-    font-size: 11.5px;
-    color: var(--ink-3);
-    margin-bottom: 18px;
-  }
-  .digest-meta a {
-    color: var(--ink-3);
-    text-decoration: none;
-    border-bottom: 1px solid var(--rule-strong);
-  }
-  .digest-meta a:hover, .digest-meta a:focus-visible {
-    color: var(--accent);
-    border-bottom-color: var(--accent);
-  }
   .digest-lede {
     color: var(--ink-2);
     font-size: 14.8px;
@@ -702,7 +722,7 @@
     header.masthead { padding-top: 8px; }
 
     /* 카드/블록이 페이지 중간에서 잘리지 않도록 */
-    .proj, .ts, .digest, .dc, .schematic, .sub, .flow-step, .stack-row, .metric { break-inside: avoid; }
+    .proj, .ts, .digest, .dc, .schematic, .sub, .flow-step, .stack-row, .metric, .identity { break-inside: avoid; }
     h1, h2, h3, h4, .sec-head { break-after: avoid; }
     p, li { orphans: 3; widows: 3; }
 
@@ -733,6 +753,16 @@
     <header class="masthead">
       <p class="eyebrow">Client Developer · Unity / C#</p>
       <h1>시각화하는 개발자<br><span class="thin">이의환</span></h1>
+
+      <dl class="identity">
+        <div><dt>학교</dt><dd>한국공학대학교</dd></div>
+        <div><dt>전공</dt><dd>소프트웨어 · 게임공학 복수전공</dd></div>
+        <div><dt>졸업</dt><dd>2025.02 졸업예정</dd></div>
+        <div><dt>Email</dt><dd><a href="mailto:luh5063014@naver.com">luh5063014@naver.com</a></dd></div>
+        <div><dt>GitHub</dt><dd><a href="https://github.com/UihwanLee">github.com/UihwanLee</a></dd></div>
+        <div><dt>Blog</dt><dd><a href="https://blog.naver.com/luh5063014">blog.naver.com/luh5063014</a></dd></div>
+      </dl>
+
       <p class="lede">
         코드의 구조와 로직을 그림으로 정리해 이해하고, 팀에 공유하는 개발자입니다.
         출시 후 서비스 중인 모바일 게임에서 <strong>길드 레이드</strong>와 <strong>이벤트 콘텐츠</strong>를
@@ -763,12 +793,6 @@
     <section id="digest" class="digest">
       <div class="digest-head">
         <span class="digest-label">Executive Summary</span>
-      </div>
-      <div class="digest-meta">
-        <span>한국공학대학교 소프트웨어전공 · 게임공학 복수전공 · 2025.02 졸업예정</span>
-        <a href="mailto:luh5063014@naver.com">luh5063014@naver.com</a>
-        <a href="https://github.com/UihwanLee">github.com/UihwanLee</a>
-        <a href="https://blog.naver.com/luh5063014">blog.naver.com/luh5063014</a>
       </div>
       <p class="digest-lede">
         팀스파르타 게임즈 게임 개발 캠프 교육생으로 출시작 2종에 참여해,
