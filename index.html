@@ -139,6 +139,14 @@
     border-left-color: var(--accent);
   }
   .rail .n { color: var(--rule-strong); font-variant-numeric: tabular-nums; }
+  .rail li.pin {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--rule);
+  }
+  .rail li.pin a { color: var(--accent); font-weight: 600; }
+  .rail li.pin .n { color: var(--accent); font-size: 9px; }
+  .rail li.pin a:hover, .rail li.pin a:focus-visible { border-left-color: var(--accent); }
   .rail-title {
     font-size: 10.5px;
     letter-spacing: .16em;
@@ -498,6 +506,136 @@
   }
   .stack-row .detail { font-size: 14px; color: var(--ink-2); line-height: 1.65; }
 
+  /* ── 한눈에 보기(요약) ───────────────────── */
+  .digest {
+    margin-top: 44px;
+    padding: 38px 34px 32px;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+    border-left: 4px solid var(--accent);
+  }
+  .digest-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .digest-label {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .digest h2 { font-size: 1.3rem; margin: 0; }
+  .digest-lede {
+    color: var(--ink-2);
+    font-size: 14.8px;
+    max-width: var(--measure);
+    margin-bottom: 28px;
+  }
+  .digest-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1px;
+    background: var(--rule-strong);
+    border: 1px solid var(--rule-strong);
+    margin-bottom: 26px;
+  }
+  .dc { background: var(--surface); display: flex; flex-direction: column; padding: 18px 18px 20px; }
+  .dc-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .dc-icon {
+    flex: 0 0 auto;
+    width: 48px;
+    height: 48px;
+    border-radius: 11px;
+    object-fit: cover;
+    border: 1px solid var(--rule-strong);
+  }
+  .dc-top-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .dc-body {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    flex: 1;
+  }
+  .dc-body .n, .dc-top-text .n {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    color: var(--accent);
+    letter-spacing: .06em;
+  }
+  .dc-body h4, .dc-top-text h4 {
+    font-family: var(--f-sans);
+    text-transform: none;
+    font-size: .98rem;
+    font-weight: 700;
+    letter-spacing: -.01em;
+    color: var(--ink);
+    margin: 0;
+  }
+  .dc-body .stat {
+    font-family: var(--f-mono);
+    font-size: 11.5px;
+    color: var(--ink-3);
+    letter-spacing: .02em;
+  }
+  .dc-body .desc {
+    font-size: 13.3px;
+    line-height: 1.62;
+    color: var(--ink-2);
+    margin: 2px 0 0;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+  .chip {
+    font-family: var(--f-mono);
+    font-size: 11.5px;
+    letter-spacing: .02em;
+    padding: 5px 11px;
+    background: var(--surface);
+    border: 1px solid var(--rule-strong);
+    color: var(--ink-2);
+  }
+  .digest-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+  }
+  .btn-pdf {
+    font-family: var(--f-mono);
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    color: var(--paper);
+    background: var(--ink);
+    border: 1px solid var(--ink);
+    padding: 11px 20px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background .15s, color .15s, border-color .15s;
+  }
+  .btn-pdf:hover, .btn-pdf:focus-visible {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--surface);
+  }
+  .digest-actions .hint {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--ink-3);
+  }
+  @media (max-width: 880px) {
+    .digest { padding: 30px 22px 26px; }
+  }
+
   /* ── 푸터 ───────────────────── */
   footer {
     margin-top: 76px;
@@ -561,6 +699,45 @@
     margin-top: 14px; letter-spacing: .03em;
   }
   @media (max-width: 700px) { .shots img { width: 168px; } .shots .sub { max-width: 168px; } }
+
+  /* ── 인쇄(PDF) ───────────────────── */
+  @media print {
+    /* 브라우저의 "배경 그래픽" 옵션이 꺼져 있어도 배경색·강조색이 그대로 인쇄되도록 강제 */
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+    :root, :root[data-theme="dark"] {
+      --paper: #ffffff;
+      --surface: #ffffff;
+      --surface-2: #f4f4f2;
+      --ink: #111111;
+      --ink-2: #333333;
+      --ink-3: #555555;
+      --rule: #cfcfcf;
+      --rule-strong: #999999;
+      --accent: #0b6b62;
+      --accent-soft: #eef4f3;
+      --amber: #b45309;
+      --amber-soft: #f5e3cd;
+      --grid: transparent;
+    }
+    body { background-image: none; }
+    .rail, .digest-actions { display: none; }
+    .wrap { grid-template-columns: 1fr; max-width: 100%; padding: 0; gap: 0; }
+    section { padding-top: 26px; }
+    header.masthead { padding-top: 8px; }
+
+    /* 카드/블록이 페이지 중간에서 잘리지 않도록 */
+    .proj, .ts, .digest, .dc, .schematic, .sub, .flow-step, .stack-row, .metric { break-inside: avoid; }
+    h1, h2, h3, h4, .sec-head { break-after: avoid; }
+    p, li { orphans: 3; widows: 3; }
+
+    img.graph { filter: none; mix-blend-mode: normal; }
+    a { color: var(--accent); text-decoration: underline; }
+  }
+  @page { size: A4 portrait; margin: 14mm 12mm; }
 </style>
 
 <div class="wrap">
@@ -568,6 +745,7 @@
   <nav class="rail" aria-label="목차">
     <div class="rail-title">Index</div>
     <ol>
+      <li class="pin"><a href="#digest"><span class="n">●</span><span>한눈에 보기</span></a></li>
       <li><a href="#live"><span class="n">01</span><span>실무 프로젝트</span></a></li>
       <li><a href="#raid"><span class="n">02</span><span>길드 레이드</span></a></li>
       <li><a href="#craft"><span class="n">03</span><span>무한제조</span></a></li>
@@ -609,6 +787,135 @@
         </div>
       </div>
     </header>
+
+    <!-- ══ 00 한눈에 보기 ══ -->
+    <section id="digest" class="digest">
+      <div class="digest-head">
+        <span class="digest-label">Executive Summary</span>
+      </div>
+      <p class="digest-lede">
+        팀스파르타 게임즈 게임 개발 캠프 교육생으로 출시작 2종에 참여해,
+        <strong>길드 레이드</strong>와 <strong>이벤트 콘텐츠</strong>를 설계부터 라이브 반영까지 담당했습니다.
+        실무 기여와 함께 학내·개인 프로젝트에서 쌓은 경험까지 정리했습니다 — 상세는 아래 섹션에서 확인하실 수 있습니다.
+      </p>
+
+      <div class="digest-cards">
+        <div class="dc">
+          <div class="dc-top">
+            <img class="dc-icon" src="assets/icon-bunkerdefense.png" alt="벙커 디펜스 앱 아이콘">
+            <div class="dc-top-text">
+              <span class="n">01 · 실무</span>
+              <h4>길드 레이드 시스템</h4>
+            </div>
+          </div>
+          <div class="dc-body">
+            <span class="stat">6주 · 181커밋 · 66파일</span>
+            <p class="desc">
+              길드원이 함께 보스에 도전해 누적 데미지로 순위를 겨루는 콘텐츠를
+              서버 API 설계부터 보스 3패턴 구현, UI, 라이브 반영까지 전 구간 담당했습니다.
+              랭킹·강화 스택·길드 퀘스트·보상 수령까지 신규 시스템 전체를 처음부터 설계했습니다.
+            </p>
+          </div>
+        </div>
+
+        <div class="dc">
+          <div class="dc-top">
+            <img class="dc-icon" src="assets/icon-bunkerdefense.png" alt="벙커 디펜스 앱 아이콘">
+            <div class="dc-top-text">
+              <span class="n">02 · 실무</span>
+              <h4>무한제조 이벤트</h4>
+            </div>
+          </div>
+          <div class="dc-body">
+            <span class="stat">10일 · 85커밋 · 첫 단독 담당</span>
+            <p class="desc">
+              컨베이어 벨트를 따라 보상이 흐르고 슬롯에 도달하면 무료 또는 결제로 수령하는 이벤트를
+              기획 해석부터 UI·데이터·결제 연동까지 혼자 담당했습니다.
+              처음 맡은 콘텐츠라 사내 가이드라인 1,141줄을 직접 작성해 이후 참고 자료로 남겼습니다.
+            </p>
+          </div>
+        </div>
+
+        <div class="dc">
+          <div class="dc-top">
+            <img class="dc-icon" src="assets/icon-brd.png" alt="벙커 딸깍 디펜스 앱 아이콘">
+            <div class="dc-top-text">
+              <span class="n">03 · 실무</span>
+              <h4>벙커 딸깍 디펜스: 랜덤TD</h4>
+            </div>
+          </div>
+          <div class="dc-body">
+            <span class="stat">511커밋 · 팀 내 2위 / 8인</span>
+            <p class="desc">
+              출시 직후 합류해 유닛·스킨·상점·배틀패스·랭킹 UI를 담당했습니다.
+              콘텐츠 UI 전반을 맡아 6월—8월 짧은 참여 기간에도 팀 내 두 번째로 많은 커밋을 기록했습니다.
+            </p>
+          </div>
+        </div>
+
+        <div class="dc">
+          <div class="dc-top">
+            <div class="dc-top-text">
+              <span class="n">04 · 실무</span>
+              <h4>라이브 운영 대응</h4>
+            </div>
+          </div>
+          <div class="dc-body">
+            <span class="stat">버그 수정 150건 (101 + 49)</span>
+            <p class="desc">
+              이미 유저가 플레이 중인 기능을 고치는 일도 함께 담당했습니다.
+              재련 → ID 변경 → 프리셋 보호 해제 → 자동합성 소실로 이어지는 3단계 연쇄 버그처럼,
+              당장 눈에 안 보이는 문제를 추적해 유저 자산 소실을 막았습니다.
+            </p>
+          </div>
+        </div>
+
+        <div class="dc">
+          <div class="dc-top">
+            <div class="dc-top-text">
+              <span class="n">05 · 학내</span>
+              <h4>ChatPDF 학습증진 플랫폼</h4>
+            </div>
+          </div>
+          <div class="dc-body">
+            <span class="stat">팀 리더 · 3인 · 2023.09—2024.09</span>
+            <p class="desc">
+              Unity WebGL 기반 학습 클라이언트에 OpenAI API를 연동한 팀 프로젝트를 리딩했습니다.
+              Git 5-branch 전략과 PR 기반 협업을 도입했고, 일정 지연 위기를 2주 단위 회의로 쪼개 정상화했습니다.
+            </p>
+          </div>
+        </div>
+
+        <div class="dc">
+          <div class="dc-top">
+            <div class="dc-top-text">
+              <span class="n">06 · 대외활동</span>
+              <h4>The Art — 소셜임팩트 디지털아트 경연대회</h4>
+            </div>
+          </div>
+          <div class="dc-body">
+            <span class="stat">서울시청역 전시작 선정</span>
+            <p class="desc">
+              AI 저작권 문제를 다룬 5분 분량의 게임으로 참가해 전시작으로 선정됐습니다.
+              플레이타임이 길어 경연 형식에 불리하다고 판단해 주제를 갈아엎고 짧고 강렬한 구성으로 재설계했습니다.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="chips">
+        <span class="chip">Unity / C#</span>
+        <span class="chip">UniTask</span>
+        <span class="chip">ScriptableObject</span>
+        <span class="chip">Git · PR 코드리뷰</span>
+        <span class="chip">Android · iOS · WebGL</span>
+      </div>
+
+      <div class="digest-actions">
+        <button type="button" class="btn-pdf" onclick="window.print()">PDF로 저장 ↓</button>
+        <span class="hint">A4 세로 기준으로 색상·레이아웃이 화면 그대로 인쇄됩니다</span>
+      </div>
+    </section>
 
     <!-- ══ 01 실무 ══ -->
     <section id="live">
